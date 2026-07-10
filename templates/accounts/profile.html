@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}پروفایل کاربری{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold mb-8">پروفایل کاربری</h1>
+    
+    <div class="grid md:grid-cols-2 gap-6">
+        <!-- اطلاعات کاربری -->
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-2xl font-bold mb-4">اطلاعات حساب کاربری</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ user_form|crispy }}
+                <button type="submit" name="update_user" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 mt-4">
+                    ذخیره تغییرات
+                </button>
+            </form>
+        </div>
+        
+        <!-- پروفایل ورزشکار -->
+        {% if user.is_client %}
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-2xl font-bold mb-4">اطلاعات ورزشی</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ profile_form|crispy }}
+                <button type="submit" name="update_profile" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 mt-4">
+                    ذخیره تغییرات
+                </button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
