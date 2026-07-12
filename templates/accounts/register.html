@@ -1,126 +1,188 @@
-{% load static %}
+{% load static %}   
 
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="fa">
+
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8" />
+    <title>ثبت نام | Skote</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="{% static  'css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
-    <!-- Icons Css -->
-    <link href="{% static  'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
-    <!-- App Css-->
-    <link href="{% static  'css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />    
+    <meta content="صفحه ثبت نام" name="description" />
+    <meta content="Themesbrand" name="author" />
+
+    <link rel="shortcut icon" href="{% static '/imgs/favicon.ico' %}">
+
+    <link href="{% static '/css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css"/>
+    <link href="{% static '/css/icons.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static '/css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
 </head>
-<body class=" width auto">
 
-
-
-    <div class="col-xl-6">
-         <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title mb-4">Horizontal Form Layout</h4>
-                                                <form method="post">
-                                                    {% csrf_token %}
-
-                                                    <div class="row mb-4">
-                                                        <label for="{{ form.first_name.id_for_label }}" class="col-sm-3 col-form-label">
-                                                            {{ form.first_name.label }}
-                                                        </label>
-                                                        <div class="col-sm-9">
-                                                            {{ form.first_name }}
-                                                            {% if form.first_name.errors %}
-                                                                <div class="text-danger small">{{ form.first_name.errors }}</div>
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row mb-4">
-                                                        <label for="{{ form.last_name.id_for_label }}" class="col-sm-3 col-form-label">
-                                                            {{ form.last_name.label }}
-                                                        </label>
-                                                        <div class="col-sm-9">
-                                                            {{ form.last_name }}
-                                                            {% if form.last_name.errors %}
-                                                                <div class="text-danger small">{{ form.last_name.errors }}</div>
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row mb-4">
-                                                        <label for="{{ form.username.id_for_label }}" class="col-sm-3 col-form-label">
-                                                            {{ form.username.label }}
-                                                        </label>
-                                                        <div class="col-sm-9">
-                                                            {{ form.username }}
-                                                            {% if form.username.errors %}
-                                                                <div class="text-danger small">{{ form.username.errors }}</div>
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row mb-4">
-                                                        <label for="{{ form.email.id_for_label }}" class="col-sm-3 col-form-label">
-                                                            {{ form.email.label }}
-                                                        </label>
-                                                        <div class="col-sm-9">
-                                                            {{ form.email }}
-                                                            {% if form.email.errors %}
-                                                                <div class="text-danger small">{{ form.email.errors }}</div>
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row mb-4">
-                                                        <label for="{{ form.phone_number.id_for_label }}" class="col-sm-3 col-form-label">
-                                                            {{ form.phone_number.label }}
-                                                        </label>
-                                                        <div class="col-sm-9">
-                                                            {{ form.phone_number }}
-                                                            {% if form.phone_number.errors %}
-                                                                <div class="text-danger small">{{ form.phone_number.errors }}</div>
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row mb-4">
-                                                        <label for="{{ form.password1.id_for_label }}" class="col-sm-3 col-form-label">
-                                                            {{ form.password1.label }}
-                                                        </label>
-                                                        <div class="col-sm-9">
-                                                            {{ form.password1 }}
-                                                            {% if form.password1.errors %}
-                                                                <div class="text-danger small">{{ form.password1.errors }}</div>
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row mb-4">
-                                                        <label for="{{ form.password2.id_for_label }}" class="col-sm-3 col-form-label">
-                                                            {{ form.password2.label }}
-                                                        </label>
-                                                        <div class="col-sm-9">
-                                                            {{ form.password2 }}
-                                                            {% if form.password2.errors %}
-                                                                <div class="text-danger small">{{ form.password2.errors }}</div>
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row justify-content-end">
-                                                        <div class="col-sm-9">
-                                                            <div>
-                                                                <button type="submit" class="btn btn-primary w-md">ثبت‌نام</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-
+<body>
+    <div class="account-pages my-5 pt-sm-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="card overflow-hidden">
+                        <div class="bg-primary bg-soft">
+                            <div class="row">
+                                <div class="col-7">
+                                    <div class="text-primary p-4">
+                                        <h5 class="text-primary">ثبت نام</h5>
+                                        <p>حساب کاربری خودت را بساز.</p>
                                     </div>
-                                    <!-- end card body -->
                                 </div>
-                                <!-- end card -->
+                                <div class="col-5 align-self-end">
+                                    <img src="{% static '/imgs/profile-img.png' %}" alt="profile" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body pt-0">
+                            <div>
+                                <a href="/">
+                                    <div class="avatar-md profile-user-wid mb-4">
+                                        <span class="avatar-title rounded-circle bg-light">
+                                            <img src="{% static '/img/logo.svg' %}" alt="logo" class="rounded-circle" height="34">
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="p-1">
+                                <form method="post">
+                                    {% csrf_token %}
+
+                                    {% if form.non_field_errors %}
+                                        <div class="alert alert-danger">
+                                            {% for error in form.non_field_errors %}
+                                                <div>{{ error }}</div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+
+                                    <div class="mb-3">
+                                        <label for="{{ form.email.id_for_label }}" class="form-label">ایمیل</label>
+                                        {{ form.email }}
+                                        {% if form.email.errors %}
+                                            <div class="text-danger small mt-1">
+                                                {% for error in form.email.errors %}
+                                                    <div>{{ error }}</div>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="{{ form.username.id_for_label }}" class="form-label">نام کاربری</label>
+                                        {{ form.username }}
+                                        {% if form.username.errors %}
+                                            <div class="text-danger small mt-1">
+                                                {% for error in form.username.errors %}
+                                                    <div>{{ error }}</div>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="{{ form.first_name.id_for_label }}" class="form-label">نام</label>
+                                        {{ form.first_name }}
+                                        {% if form.first_name.errors %}
+                                            <div class="text-danger small mt-1">
+                                                {% for error in form.first_name.errors %}
+                                                    <div>{{ error }}</div>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="{{ form.last_name.id_for_label }}" class="form-label">نام خانوادگی</label>
+                                        {{ form.last_name }}
+                                        {% if form.last_name.errors %}
+                                            <div class="text-danger small mt-1">
+                                                {% for error in form.last_name.errors %}
+                                                    <div>{{ error }}</div>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="{{ form.phone_number.id_for_label }}" class="form-label">شماره تلفن</label>
+                                        {{ form.phone_number }}
+                                        {% if form.phone_number.errors %}
+                                            <div class="text-danger small mt-1">
+                                                {% for error in form.phone_number.errors %}
+                                                    <div>{{ error }}</div>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="{{ form.password1.id_for_label }}" class="form-label">رمز عبور</label>
+                                        {{ form.password1 }}
+                                        {% if form.password1.errors %}
+                                            <div class="text-danger small mt-1">
+                                                {% for error in form.password1.errors %}
+                                                    <div>{{ error }}</div>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="{{ form.password2.id_for_label }}" class="form-label">تکرار رمز عبور</label>
+                                        {{ form.password2 }}
+                                        {% if form.password2.errors %}
+                                            <div class="text-danger small mt-1">
+                                                {% for error in form.password2.errors %}
+                                                    <div>{{ error }}</div>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="mt-4 d-grid">
+                                        <button class="btn btn-primary waves-effect waves-light" type="submit">
+                                            ثبت نام
+                                        </button>
+                                    </div>
+
+                                    <div class="mt-4 text-center">
+                                        <p class="mb-0">
+                                            با ثبت نام، شما شرایط استفاده را می‌پذیرید.
+                                        </p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 text-center">
+                        <div>
+                            <p>
+                                قبلاً حساب ساخته‌ای؟
+                                <a href="{% url 'accounts:login' %}" class="fw-medium text-primary">ورود</a>
+                            </p>
+                            <p>
+                                © <script>document.write(new Date().getFullYear())</script> Skote
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    
+
+    <script src="{% static '/libs/jquery/jquery.min.js' %}"></script>
+    <script src="{% static '/libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static '/libs/metismenu/metisMenu.min.js' %}"></script>
+    <script src="{% static '/libs/simplebar/simplebar.min.js' %}"></script>
+    <script src="{% static '/libs/node-waves/waves.min.js' %}"></script>
+    <script src="{% static '/js/pages/validation.init.js' %}"></script>
+    <script src="{% static '/js/app.js' %}"></script>
 </body>
+
 </html>
