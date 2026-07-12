@@ -1,28 +1,171 @@
-{% extends 'base.html' %}
-{% load crispy_forms_tags %}
+{% load static %}
 
-{% block title %}ورود{% endblock %}
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <title>ورود | Sportex</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="ورود به حساب کاربری" name="description" />
+    <meta content="Sportex" name="author" />
 
-{% block content %}
-<div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow">
-    <h2 class="text-3xl font-bold mb-6 text-center">ورود به حساب کاربری</h2>
-    
-    <form method="post" novalidate>
-        {% csrf_token %}
-        {{ form|crispy }}
-        
-        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700 mt-4">
-            ورود
-        </button>
-    </form>
-    
-    <div class="mt-4 text-center">
-        <a href="{% url 'accounts:password_reset' %}" class="text-blue-600 hover:underline">رمز عبور خود را فراموش کرده‌اید؟</a>
+    <link rel="shortcut icon" href="{% static ' /favicon.ico' %}">
+
+    <!-- Bootstrap Css -->
+    <link href="{% static '/css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="{% static '/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- App Css -->
+    <link href="{% static '/css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="account-pages my-5 pt-sm-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="card overflow-hidden">
+                        <div class="bg-primary bg-soft">
+                            <div class="row">
+                                <div class="col-7">
+                                    <div class="text-primary p-4">
+                                        <h5 class="text-primary">خوش برگشتی!</h5>
+                                        <p>برای ادامه وارد حساب کاربری خود شوید.</p>
+                                    </div>
+                                </div>
+                                <div class="col-5 align-self-end">
+                                    <img src="{% static 'img/profile-img.png' %}" alt="" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body pt-0">
+                            <div class="auth-logo">
+                                <a href="{% url 'home' %}" class="auth-logo-light">
+                                    <div class="avatar-md profile-user-wid mb-4">
+                                        <span class="avatar-title rounded-circle bg-light">
+                                            <img src="{% static 'img/logo-light.svg' %}" alt="" class="rounded-circle" height="34">
+                                        </span>
+                                    </div>
+                                </a>
+
+                                <a href="{% url 'home' %}" class="auth-logo-dark">
+                                    <div class="avatar-md profile-user-wid mb-4">
+                                        <span class="avatar-title rounded-circle bg-light">
+                                            <img src="{% static 'img/logo.svg' %}" alt="" class="rounded-circle" height="34">
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="p-2">
+                                <form class="form-horizontal" method="post">
+                                    {% csrf_token %}
+
+                                    {% if form.non_field_errors %}
+                                        <div class="alert alert-danger">
+                                            {% for error in form.non_field_errors %}
+                                                <div>{{ error }}</div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+
+                                    <div class="mb-3">
+                                        <label for="{{ form.username.id_for_label }}" class="form-label">
+                                            {{ form.username.label }}
+                                        </label>
+                                        {{ form.username }}
+                                        {% if form.username.errors %}
+                                            <div class="text-danger mt-1 small">
+                                                {% for error in form.username.errors %}
+                                                    <div>{{ error }}</div>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="{{ form.password.id_for_label }}" class="form-label">
+                                            {{ form.password.label }}
+                                        </label>
+                                        <div class="input-group auth-pass-inputgroup">
+                                            {{ form.password }}
+                                            <button class="btn btn-light" type="button" id="password-addon">
+                                                <i class="mdi mdi-eye-outline"></i>
+                                            </button>
+                                        </div>
+                                        {% if form.password.errors %}
+                                            <div class="text-danger mt-1 small">
+                                                {% for error in form.password.errors %}
+                                                    <div>{{ error }}</div>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="remember-check">
+                                        <label class="form-check-label" for="remember-check">
+                                            مرا به خاطر بسپار
+                                        </label>
+                                    </div>
+
+                                    <div class="mt-3 d-grid">
+                                        <button class="btn btn-primary waves-effect waves-light" type="submit">
+                                            ورود
+                                        </button>
+                                    </div>
+
+                                    <div class="mt-4 text-center">
+                                        <a href="#" class="text-muted">
+                                            <i class="mdi mdi-lock me-1"></i>
+                                            رمز عبور را فراموش کرده‌اید؟
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 text-center">
+                        <div>
+                            <p>
+                                حساب کاربری ندارید؟
+                            </p>
+                            <p>
+                                © <script>document.write(new Date().getFullYear())</script> Sportex
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
-    
-    <div class="mt-4 text-center">
-        <span class="text-gray-600">حساب کاربری ندارید؟</span>
-        <a href="{% url 'accounts:register' %}" class="text-blue-600 hover:underline">ثبت‌نام کنید</a>
-    </div>
-</div>
-{% endblock %}
+
+    <!-- JAVASCRIPT -->
+    <script src="{% static '/libs/jquery/jquery.min.js' %}"></script>
+    <script src="{% static '/libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static '/libs/metismenu/metisMenu.min.js' %}"></script>
+    <script src="{% static '/libs/simplebar/simplebar.min.js' %}"></script>
+    <script src="{% static '/libs/node-waves/waves.min.js' %}"></script>
+    <script src="{% static '/js/app.js' %}"></script>
+
+    <script>
+        document.getElementById('password-addon').addEventListener('click', function () {
+            const passwordInput = document.getElementById('{{ form.password.id_for_label }}');
+            const icon = this.querySelector('i');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('mdi-eye-outline');
+                icon.classList.add('mdi-eye-off-outline');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('mdi-eye-off-outline');
+                icon.classList.add('mdi-eye-outline');
+            }
+        });
+    </script>
+</body>
+</html>
