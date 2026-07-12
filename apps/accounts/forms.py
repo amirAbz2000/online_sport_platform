@@ -37,7 +37,33 @@ class CustomUserCreationForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['username'].label = "نام کاربری"
+        self.fields['username'].label = 'نام کاربری'
+        self.fields['username'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'نام کاربری را وارد کنید'
+        })
+        self.fields['email'].widget.attrs.update({
+            'placeholder': 'ایمیل را وارد کنید'
+        })
+        self.fields['first_name'].widget.attrs.update({
+            'placeholder': 'نام را وارد کنید'
+        })
+        self.fields['last_name'].widget.attrs.update({
+            'placeholder': 'نام خانوادگی را وارد کنید'
+        })
+        self.fields['phone_number'].widget.attrs.update({
+            'placeholder': 'شماره تلفن را وارد کنید'
+        })
+        self.fields['password1'].label = 'رمز عبور'
+        self.fields['password1'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'رمز عبور را وارد کنید'
+        })
+        self.fields['password2'].label = 'تکرار رمز عبور'
+        self.fields['password2'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'رمز عبور را دوباره وارد کنید'
+        })
 
 
 class CustomLoginForm(AuthenticationForm):
@@ -63,6 +89,13 @@ class UserUpdateForm(forms.ModelForm):
         fields = ['first_name', 'last_name', 'email', 'phone_number', 'profile_picture']
 
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({'class': 'form-control'})
+
+            
+
 class ClientProfileUpdateForm(forms.ModelForm):
     """
     فرم ویرایش اطلاعات اختصاصی ورزشکار
@@ -73,3 +106,10 @@ class ClientProfileUpdateForm(forms.ModelForm):
         widgets = {
             'birth_date': forms.DateInput(attrs={'type': 'date'}),
         }
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            if 'class' not in field.widget.attrs:
+                field.widget.attrs.update({'class': 'form-control'})    

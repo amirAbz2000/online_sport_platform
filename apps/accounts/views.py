@@ -55,6 +55,20 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     """
     template_name = 'accounts/dashboard.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        
+        # ارسال اطلاعات کاربر
+        context['user'] = user
+        
+        # اگر کاربر ورزشکار (Client) است، اطلاعات پروفایلش رو هم بفرست
+        if user.is_client:
+            # استفاده از select_related برای بهینه کردن کوئری (جلوگیری از N+1)
+            context['profile'] = ClientProfile.objects.select_related('assigned_coach').filter(user=user).first()
+            
+        return context
+
 
 class ProfileView(LoginRequiredMixin, View):
     """

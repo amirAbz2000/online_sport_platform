@@ -1,38 +1,130 @@
-{% extends 'base.html' %}
-{% load crispy_forms_tags %}
+{% load static %}   
 
-{% block title %}پروفایل کاربری{% endblock %}
+<!doctype html>
+<html lang="fa">
 
-{% block content %}
-<div class="max-w-4xl mx-auto">
-    <h1 class="text-3xl font-bold mb-8">پروفایل کاربری</h1>
-    
-    <div class="grid md:grid-cols-2 gap-6">
-        <!-- اطلاعات کاربری -->
-        <div class="bg-white p-6 rounded-lg shadow">
-            <h2 class="text-2xl font-bold mb-4">اطلاعات حساب کاربری</h2>
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ user_form|crispy }}
-                <button type="submit" name="update_user" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 mt-4">
-                    ذخیره تغییرات
-                </button>
-            </form>
-        </div>
-        
-        <!-- پروفایل ورزشکار -->
+<head>
+    <meta charset="utf-8" />
+    <title>ثبت نام | Skote</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="صفحه ثبت نام" name="description" />
+    <meta content="Themesbrand" name="author" />
+
+    <link rel="shortcut icon" href="{% static '/imgs/favicon.ico' %}">
+
+    <link href="{% static '/css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css"/>
+    <link href="{% static '/css/icons.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static '/css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+    <style>
+    /* استایل اختصاصی برای پس‌زمینه و مرکز‌چین کردن */
+        .profile-bg {
+            background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070'); /* آدرس عکس پس‌زمینه ورزشی */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 15px;
+            position: relative;
+        }
+
+        /* لایه تیره روی عکس برای خوانایی بیشتر فرم */
+        .profile-bg::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.5); /* تیرگی ۵۰ درصد */
+            z-index: 0;
+        }
+
+       
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            backdrop-filter: blur(5px); /* افکت شیشه‌ای مات */
+            background: rgba(255, 255, 255, 0.92);
+        }
+    </style>
+</head>
+
+
+<body class="profile-bg">
+
+        <div class="row">
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">اطلاعات حساب کاربری</h4>
+                    
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        {% for field in user_form %}
+                        <div class="mb-3 row">
+                            <label for="{{ field.id_for_label }}" class="col-md-3 col-form-label">{{ field.label }}</label>
+                            <div class="col-md-9">
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="text-danger small">{{ field.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                        <div class="row mt-4">
+                            <div class="col-md-9 offset-md-3">
+                                <button type="submit" name="update_user" class="btn btn-primary w-md">ذخیره تغییرات حساب</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> <!-- end col -->
+
         {% if user.is_client %}
-        <div class="bg-white p-6 rounded-lg shadow">
-            <h2 class="text-2xl font-bold mb-4">اطلاعات ورزشی</h2>
-            <form method="post">
-                {% csrf_token %}
-                {{ profile_form|crispy }}
-                <button type="submit" name="update_profile" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 mt-4">
-                    ذخیره تغییرات
-                </button>
-            </form>
-        </div>
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">اطلاعات فیزیکی و ورزشی</h4>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        {% for field in profile_form %}
+                        <div class="mb-3 row">
+                            <label for="{{ field.id_for_label }}" class="col-md-3 col-form-label">{{ field.label }}</label>
+                            <div class="col-md-9">
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="text-danger small">{{ field.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                        <div class="row mt-4">
+                            <div class="col-md-9 offset-md-3">
+                                <button type="submit" name="update_profile" class="btn btn-success w-md">به‌روزرسانی پروفایل ورزشی</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> <!-- end col -->
         {% endif %}
     </div>
-</div>
-{% endblock %}
+
+    <script src="{% static '/libs/jquery/jquery.min.js' %}"></script>
+    <script src="{% static '/libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static '/libs/metismenu/metisMenu.min.js' %}"></script>
+    <script src="{% static '/libs/simplebar/simplebar.min.js' %}"></script>
+    <script src="{% static '/libs/node-waves/waves.min.js' %}"></script>
+    <script src="{% static '/js/pages/validation.init.js' %}"></script>
+    <script src="{% static '/js/app.js' %}"></script>
+</body>
+
+</html>
